@@ -5,21 +5,26 @@ MCU=atmega328p
 F_CPU=16000000
 BAUD=115200
 
-if test -n "$1"; then
-  PORT=$1
-elif test -c /dev/ttyACM0; then
-  PORT=/dev/ttyACM0
-elif test -c /dev/ttyUSB0; then
-  PORT=/dev/ttyUSB0
-fi
+#if test -n "$1"; then
+#  PORT=$1
+#elif test -c /dev/ttyACM0; then
+#  PORT=/dev/ttyACM0
+#elif test -c /dev/ttyUSB0; then
+#  PORT=/dev/ttyUSB0
+#elif test -c /dev/cu.usbmodem1411; then
+#  PORT=/dev/cu.usbmodem1411
+#elif test -c /dev/cu.usbmodem1421; then
+#  PORT=/dev/cu.usbmodem1421
+#fi
+PORT=/dev/cu.usbmodem1411
 
 ROOT=$(cd `dirname $0`; pwd)
 mkdir -p $ROOT/build
 rm -f $ROOT/build/*
-
-ARDUINO_ROOT=/usr/share/arduino
-ARDUINO_PATH=$ARDUINO_ROOT/hardware/arduino/cores/arduino
-VARIANTS_PATH=$ARDUINO_ROOT/hardware/arduino/variants/standard
+#echo ROOT IS $ROOT
+ARDUINO_ROOT=/Applications/Arduino.app/Contents/Java/
+ARDUINO_PATH=$ARDUINO_ROOT/hardware/arduino/avr/cores/arduino
+VARIANTS_PATH=$ARDUINO_ROOT/hardware/arduino/avr/variants/standard
 
 CORE_SOURCES=`echo $ARDUINO_PATH/{main.cpp,wiring*.c,WInterrupts.c,\
 {WMath,WString,Print,HardwareSerial,IPAddress}.cpp}`
